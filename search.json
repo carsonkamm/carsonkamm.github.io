@@ -1,30 +1,16 @@
 [
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Latest Post",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nMar 20, 2023\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "No matching items"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "About Me",
     "section": "",
-    "text": "About this blog"
+    "text": "About this blog\nI’m a sophomore at the University of Nebraska-Lincoln majoring in Sports Media & Communication, with a minor in Business Administration. I came to Lincoln from Portland, Oregon, but throughout my life I’ve also lived in Colorado, California, and Florida.\nI grew up playing baseball, and have aspired to find a career in baseball long-term. Being a fan of the Tampa Bay Rays, I became aware of the underlying advanced statistics in baseball that have become prevalent across all front offices in Major League Baseball.\nSince becoming informed of these statistics, I’ve develop a strong interest in them and have spent countless hours researching and learning more about how to use these statistics in player development. I took a student manager with the Nebraska Baseball program, where I’ve been able to utilize this knowledge to assist the coaching staff with reports and information on our own players, as well as opponents."
   }
 ]
