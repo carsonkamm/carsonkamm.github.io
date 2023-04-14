@@ -339,73 +339,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  breakstats<span class="sc">$</span>MY <span class="ot">&lt;-</span> <span class="fu">paste</span>(breakstats<span class="sc">$</span>first_name, breakstats<span class="sc">$</span>last_name)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(breakstats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 576
-Columns: 16
-$ last_name          &lt;chr&gt; "Wainwright", "Greinke", "Verlander", "Sanchez", "J…
-$ first_name         &lt;chr&gt; "Adam", "Zack", "Justin", "Anibal", "Kenley", "Jess…
-$ player_id          &lt;dbl&gt; 425794, 425844, 434378, 434671, 445276, 445926, 446…
-$ year               &lt;dbl&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 202…
-$ xba                &lt;dbl&gt; 0.270, 0.284, 0.207, 0.250, 0.169, 0.263, 0.280, 0.…
-$ xslg               &lt;dbl&gt; 0.419, 0.441, 0.331, 0.411, 0.292, 0.415, 0.451, 0.…
-$ xwoba              &lt;dbl&gt; 0.328, 0.336, 0.255, 0.332, 0.239, 0.321, 0.355, 0.…
-$ xobp               &lt;dbl&gt; 0.326, 0.322, 0.248, 0.344, 0.247, 0.317, 0.361, 0.…
-$ xiso               &lt;dbl&gt; 0.148, 0.157, 0.124, 0.162, 0.124, 0.152, 0.171, 0.…
-$ exit_velocity_avg  &lt;dbl&gt; 87.8, 88.9, 87.8, 88.5, 87.1, 90.1, 89.9, 87.1, 88.…
-$ launch_angle_avg   &lt;dbl&gt; 11.0, 12.6, 16.9, 18.8, 21.9, 13.4, 13.4, 18.5, 14.…
-$ barrel_batted_rate &lt;dbl&gt; 6.5, 6.8, 6.3, 7.7, 7.3, 8.1, 8.6, 6.9, 8.2, 9.5, 1…
-$ ff_avg_break_z     &lt;dbl&gt; -20.1, -18.4, -11.4, -17.1, NA, -20.5, -15.0, -20.2…
-$ sl_avg_break_z     &lt;dbl&gt; NA, -34.7, -31.0, -34.6, -47.4, NA, NA, NA, NA, NA,…
-$ ...15              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-$ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verlande…</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>breakstats <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(MY, ff_avg_break_z, sl_avg_break_z) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Name =</span> MY) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">FastballVBreak =</span> ff_avg_break_z) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">SliderVBreak =</span> sl_avg_break_z) <span class="sc">%&gt;%</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>, <span class="at">wt=</span>FastballVBreak) <span class="sc">%&gt;%</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(FastballVBreak)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">FastballVBreak =</span> <span class="st">"Fastball V-Break"</span>,</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">SliderVBreak =</span> <span class="st">"Slider V-Break"</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"How is Pete Fairbanks so effective with just two pitches?"</span>,</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Fairbanks has a unique rising fastball that's complimented by one of the sharpest sliders in the league."</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"title"</span>)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"subtitle"</span>)</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"**By:** Carson Kamm  | **Source:** Baseball Savant"</span>)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"navy"</span>),</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Name <span class="sc">==</span> <span class="st">"Pete Fairbanks"</span></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>breakstats <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(MY, ff_avg_break_z, sl_avg_break_z) <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Name =</span> MY) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">FastballVBreak =</span> ff_avg_break_z) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">SliderVBreak =</span> sl_avg_break_z) <span class="sc">%&gt;%</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>, <span class="at">wt=</span>FastballVBreak) <span class="sc">%&gt;%</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(FastballVBreak)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">FastballVBreak =</span> <span class="st">"Fastball V-Break"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">SliderVBreak =</span> <span class="st">"Slider V-Break"</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"How is Pete Fairbanks so effective with just two pitches?"</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Fairbanks has a unique rising fastball that's complimented by one of the sharpest sliders in the league."</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"title"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"subtitle"</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"**By:** Carson Kamm  | **Source:** Baseball Savant"</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"navy"</span>),</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Name <span class="sc">==</span> <span class="st">"Pete Fairbanks"</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 
-<div id="huhxzjplfl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="owcvmdjidk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#huhxzjplfl) .gt_table {
+:where(#owcvmdjidk) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -430,7 +406,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   border-left-color: #D3D3D3;
 }
 
-:where(#huhxzjplfl) .gt_heading {
+:where(#owcvmdjidk) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -442,12 +418,12 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   border-right-color: #D3D3D3;
 }
 
-:where(#huhxzjplfl) .gt_caption {
+:where(#owcvmdjidk) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#huhxzjplfl) .gt_title {
+:where(#owcvmdjidk) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -459,7 +435,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   border-bottom-width: 0;
 }
 
-:where(#huhxzjplfl) .gt_subtitle {
+:where(#owcvmdjidk) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -471,13 +447,13 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   border-top-width: 0;
 }
 
-:where(#huhxzjplfl) .gt_bottom_border {
+:where(#owcvmdjidk) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#huhxzjplfl) .gt_col_headings {
+:where(#owcvmdjidk) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -492,7 +468,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   border-right-color: #D3D3D3;
 }
 
-:where(#huhxzjplfl) .gt_col_heading {
+:where(#owcvmdjidk) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -512,7 +488,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   overflow-x: hidden;
 }
 
-:where(#huhxzjplfl) .gt_column_spanner_outer {
+:where(#owcvmdjidk) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -524,15 +500,15 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   padding-right: 4px;
 }
 
-:where(#huhxzjplfl) .gt_column_spanner_outer:first-child {
+:where(#owcvmdjidk) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#huhxzjplfl) .gt_column_spanner_outer:last-child {
+:where(#owcvmdjidk) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#huhxzjplfl) .gt_column_spanner {
+:where(#owcvmdjidk) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -544,7 +520,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   width: 100%;
 }
 
-:where(#huhxzjplfl) .gt_group_heading {
+:where(#owcvmdjidk) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -570,7 +546,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   text-align: left;
 }
 
-:where(#huhxzjplfl) .gt_empty_group_heading {
+:where(#owcvmdjidk) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -585,15 +561,15 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   vertical-align: middle;
 }
 
-:where(#huhxzjplfl) .gt_from_md > :first-child {
+:where(#owcvmdjidk) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#huhxzjplfl) .gt_from_md > :last-child {
+:where(#owcvmdjidk) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#huhxzjplfl) .gt_row {
+:where(#owcvmdjidk) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -612,7 +588,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   overflow-x: hidden;
 }
 
-:where(#huhxzjplfl) .gt_stub {
+:where(#owcvmdjidk) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -625,7 +601,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   padding-right: 5px;
 }
 
-:where(#huhxzjplfl) .gt_stub_row_group {
+:where(#owcvmdjidk) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -639,11 +615,11 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   vertical-align: top;
 }
 
-:where(#huhxzjplfl) .gt_row_group_first td {
+:where(#owcvmdjidk) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#huhxzjplfl) .gt_summary_row {
+:where(#owcvmdjidk) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -653,16 +629,16 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   padding-right: 5px;
 }
 
-:where(#huhxzjplfl) .gt_first_summary_row {
+:where(#owcvmdjidk) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#huhxzjplfl) .gt_first_summary_row.thick {
+:where(#owcvmdjidk) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#huhxzjplfl) .gt_last_summary_row {
+:where(#owcvmdjidk) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -672,7 +648,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   border-bottom-color: #D3D3D3;
 }
 
-:where(#huhxzjplfl) .gt_grand_summary_row {
+:where(#owcvmdjidk) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -682,7 +658,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   padding-right: 5px;
 }
 
-:where(#huhxzjplfl) .gt_first_grand_summary_row {
+:where(#owcvmdjidk) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -692,11 +668,11 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   border-top-color: #D3D3D3;
 }
 
-:where(#huhxzjplfl) .gt_striped {
+:where(#owcvmdjidk) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#huhxzjplfl) .gt_table_body {
+:where(#owcvmdjidk) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -705,7 +681,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   border-bottom-color: #D3D3D3;
 }
 
-:where(#huhxzjplfl) .gt_footnotes {
+:where(#owcvmdjidk) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -719,7 +695,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   border-right-color: #D3D3D3;
 }
 
-:where(#huhxzjplfl) .gt_footnote {
+:where(#owcvmdjidk) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -728,7 +704,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   padding-right: 5px;
 }
 
-:where(#huhxzjplfl) .gt_sourcenotes {
+:where(#owcvmdjidk) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -742,7 +718,7 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   border-right-color: #D3D3D3;
 }
 
-:where(#huhxzjplfl) .gt_sourcenote {
+:where(#owcvmdjidk) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -750,64 +726,64 @@ $ MY                 &lt;chr&gt; "Adam Wainwright", "Zack Greinke", "Justin Verl
   padding-right: 5px;
 }
 
-:where(#huhxzjplfl) .gt_left {
+:where(#owcvmdjidk) .gt_left {
   text-align: left;
 }
 
-:where(#huhxzjplfl) .gt_center {
+:where(#owcvmdjidk) .gt_center {
   text-align: center;
 }
 
-:where(#huhxzjplfl) .gt_right {
+:where(#owcvmdjidk) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#huhxzjplfl) .gt_font_normal {
+:where(#owcvmdjidk) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#huhxzjplfl) .gt_font_bold {
+:where(#owcvmdjidk) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#huhxzjplfl) .gt_font_italic {
+:where(#owcvmdjidk) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#huhxzjplfl) .gt_super {
+:where(#owcvmdjidk) .gt_super {
   font-size: 65%;
 }
 
-:where(#huhxzjplfl) .gt_footnote_marks {
+:where(#owcvmdjidk) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#huhxzjplfl) .gt_asterisk {
+:where(#owcvmdjidk) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#huhxzjplfl) .gt_indent_1 {
+:where(#owcvmdjidk) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#huhxzjplfl) .gt_indent_2 {
+:where(#owcvmdjidk) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#huhxzjplfl) .gt_indent_3 {
+:where(#owcvmdjidk) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#huhxzjplfl) .gt_indent_4 {
+:where(#owcvmdjidk) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#huhxzjplfl) .gt_indent_5 {
+:where(#owcvmdjidk) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
