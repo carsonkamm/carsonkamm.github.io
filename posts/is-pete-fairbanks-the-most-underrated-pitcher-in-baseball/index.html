@@ -221,32 +221,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"stats.csv"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>fairbanks <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">filter</span>(last_name <span class="sc">==</span> <span class="st">"Fairbanks"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>stats,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>xwoba, <span class="at">y=</span>xba, <span class="at">size=</span>p_total_pa),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">"grey"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span>.<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"How does Pete Fairbanks stand out among qualifying pitchers?"</span>, <span class="at">subtitle=</span><span class="st">"Fairbanks paces other pitchers in relation to xwOBA and xBA."</span>, <span class="at">x=</span><span class="st">"xwOBA"</span>, <span class="at">y=</span><span class="st">"xBA"</span>, <span class="at">caption=</span><span class="st">"Source: Baseball Savant | By Carson Kamm"</span>) <span class="sc">+</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>fairbanks,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>xwoba, <span class="at">y=</span>xba, <span class="at">size=</span>p_total_pa),</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">"navy"</span>) <span class="sc">+</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>fairbanks,</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>xwoba, <span class="at">y=</span>xba, <span class="at">label=</span>last_name)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"stats.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">BattersFaced =</span> p_total_pa)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>fairbanks <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">filter</span>(last_name <span class="sc">==</span> <span class="st">"Fairbanks"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>stats,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>xwoba, <span class="at">y=</span>xba, <span class="at">size=</span>BattersFaced),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">"grey"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span>.<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"How does Pete Fairbanks stand out among qualifying pitchers?"</span>, <span class="at">subtitle=</span><span class="st">"Fairbanks paces other pitchers in relation to xwOBA and xBA."</span>, <span class="at">x=</span><span class="st">"xwOBA"</span>, <span class="at">y=</span><span class="st">"xBA"</span>, <span class="at">caption=</span><span class="st">"Source: Baseball Savant | By Carson Kamm"</span>) <span class="sc">+</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>fairbanks,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>xwoba, <span class="at">y=</span>xba, <span class="at">size=</span>BattersFaced),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">"navy"</span>) <span class="sc">+</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>fairbanks,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>xwoba, <span class="at">y=</span>xba, <span class="at">label=</span>last_name)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
@@ -381,12 +382,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </details>
 <div class="cell-output-display">
 
-<div id="gfjdgqzxrc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hpfvcrrise" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#gfjdgqzxrc) .gt_table {
+:where(#hpfvcrrise) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -411,7 +412,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-left-color: #D3D3D3;
 }
 
-:where(#gfjdgqzxrc) .gt_heading {
+:where(#hpfvcrrise) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -423,12 +424,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#gfjdgqzxrc) .gt_caption {
+:where(#hpfvcrrise) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#gfjdgqzxrc) .gt_title {
+:where(#hpfvcrrise) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -440,7 +441,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-width: 0;
 }
 
-:where(#gfjdgqzxrc) .gt_subtitle {
+:where(#hpfvcrrise) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -452,13 +453,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-width: 0;
 }
 
-:where(#gfjdgqzxrc) .gt_bottom_border {
+:where(#hpfvcrrise) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#gfjdgqzxrc) .gt_col_headings {
+:where(#hpfvcrrise) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -473,7 +474,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#gfjdgqzxrc) .gt_col_heading {
+:where(#hpfvcrrise) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -493,7 +494,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-:where(#gfjdgqzxrc) .gt_column_spanner_outer {
+:where(#hpfvcrrise) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -505,15 +506,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 4px;
 }
 
-:where(#gfjdgqzxrc) .gt_column_spanner_outer:first-child {
+:where(#hpfvcrrise) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#gfjdgqzxrc) .gt_column_spanner_outer:last-child {
+:where(#hpfvcrrise) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#gfjdgqzxrc) .gt_column_spanner {
+:where(#hpfvcrrise) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -525,7 +526,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   width: 100%;
 }
 
-:where(#gfjdgqzxrc) .gt_group_heading {
+:where(#hpfvcrrise) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -551,7 +552,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   text-align: left;
 }
 
-:where(#gfjdgqzxrc) .gt_empty_group_heading {
+:where(#hpfvcrrise) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -566,15 +567,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-:where(#gfjdgqzxrc) .gt_from_md > :first-child {
+:where(#hpfvcrrise) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#gfjdgqzxrc) .gt_from_md > :last-child {
+:where(#hpfvcrrise) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#gfjdgqzxrc) .gt_row {
+:where(#hpfvcrrise) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -593,7 +594,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-:where(#gfjdgqzxrc) .gt_stub {
+:where(#hpfvcrrise) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -606,7 +607,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#gfjdgqzxrc) .gt_stub_row_group {
+:where(#hpfvcrrise) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -620,11 +621,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: top;
 }
 
-:where(#gfjdgqzxrc) .gt_row_group_first td {
+:where(#hpfvcrrise) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#gfjdgqzxrc) .gt_summary_row {
+:where(#hpfvcrrise) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -634,16 +635,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#gfjdgqzxrc) .gt_first_summary_row {
+:where(#hpfvcrrise) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#gfjdgqzxrc) .gt_first_summary_row.thick {
+:where(#hpfvcrrise) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#gfjdgqzxrc) .gt_last_summary_row {
+:where(#hpfvcrrise) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -653,7 +654,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-:where(#gfjdgqzxrc) .gt_grand_summary_row {
+:where(#hpfvcrrise) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -663,7 +664,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#gfjdgqzxrc) .gt_first_grand_summary_row {
+:where(#hpfvcrrise) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -673,11 +674,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-color: #D3D3D3;
 }
 
-:where(#gfjdgqzxrc) .gt_striped {
+:where(#hpfvcrrise) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#gfjdgqzxrc) .gt_table_body {
+:where(#hpfvcrrise) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -686,7 +687,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-:where(#gfjdgqzxrc) .gt_footnotes {
+:where(#hpfvcrrise) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -700,7 +701,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#gfjdgqzxrc) .gt_footnote {
+:where(#hpfvcrrise) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -709,7 +710,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#gfjdgqzxrc) .gt_sourcenotes {
+:where(#hpfvcrrise) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -723,7 +724,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#gfjdgqzxrc) .gt_sourcenote {
+:where(#hpfvcrrise) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -731,64 +732,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#gfjdgqzxrc) .gt_left {
+:where(#hpfvcrrise) .gt_left {
   text-align: left;
 }
 
-:where(#gfjdgqzxrc) .gt_center {
+:where(#hpfvcrrise) .gt_center {
   text-align: center;
 }
 
-:where(#gfjdgqzxrc) .gt_right {
+:where(#hpfvcrrise) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#gfjdgqzxrc) .gt_font_normal {
+:where(#hpfvcrrise) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#gfjdgqzxrc) .gt_font_bold {
+:where(#hpfvcrrise) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#gfjdgqzxrc) .gt_font_italic {
+:where(#hpfvcrrise) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#gfjdgqzxrc) .gt_super {
+:where(#hpfvcrrise) .gt_super {
   font-size: 65%;
 }
 
-:where(#gfjdgqzxrc) .gt_footnote_marks {
+:where(#hpfvcrrise) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#gfjdgqzxrc) .gt_asterisk {
+:where(#hpfvcrrise) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#gfjdgqzxrc) .gt_indent_1 {
+:where(#hpfvcrrise) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#gfjdgqzxrc) .gt_indent_2 {
+:where(#hpfvcrrise) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#gfjdgqzxrc) .gt_indent_3 {
+:where(#hpfvcrrise) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#gfjdgqzxrc) .gt_indent_4 {
+:where(#hpfvcrrise) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#gfjdgqzxrc) .gt_indent_5 {
+:where(#hpfvcrrise) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
